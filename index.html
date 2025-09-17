@@ -1,177 +1,779 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Academic Webpage" />
-    <meta name="author" content="senli1073" />
-    <title id="title"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏开发者主页</title>
+    <!-- 引入Marked.js用于解析Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6A7BFF;
+            --secondary: #50C878;
+            --accent: #FFA62E;
+            --danger: #FF5252;
+            --dark: #2C2F33;
+            --light: #F9F9F9;
+            --card-bg: #40444B;
+            --section-spacing: 3rem;
+            --border-radius: 8px;
+        }
 
-    <!-- Icon -->
-    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
 
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        body {
+            background: linear-gradient(135deg, #F0F2FF, #E6F0FF);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
 
-    <!-- Google fonts-->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap"
-        rel="stylesheet" />
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link type="text/css" href="static/css/styles.css" rel="stylesheet" />
-    <link type="text/css" href="static/css/main.css" rel="stylesheet" />
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: var(--section-spacing);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
 
-    <!-- Bootstrap core JS-->
-    <script type="text/javascript" src="static/js/bootstrap.bundle.min.js"></script>
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
 
-    <!-- For Compatability -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    
-    <!-- Markdown -->
-    <script type="text/javascript" src="static/js/marked.min.js"></script>
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
 
-    <!-- Mathematics -->
-    <script>
-        // See https://docs.mathjax.org/en/latest/index.html for more details.
-        MathJax = {
-            tex: {
-                packages: {},              // extensions to use
-                inlineMath: [              // start/end delimiter pairs for in-line math
-                    ['$', '$'],
-                    ['\\(', '\\)']
-                ],
-                displayMath: [             // start/end delimiter pairs for display math
-                    ['$$', '$$'],
-                    ['\\[', '\\]']
-                ],
-                processEscapes: false,      // use \$ to produce a literal dollar sign
-                processEnvironments: true, // process \begin{xxx}...\end{xxx} outside math mode
-                processRefs: true,         // process \ref{...} outside of math mode
-                digits: /^(?:[0-9]+(?:\{,\}[0-9]{3})*(?:\.[0-9]*)?|\.[0-9]+)/,    // pattern for recognizing numbers
-                tags: 'all',              // or 'ams' or 'all'
-                tagSide: 'right',          // side for \tag macros
-                tagIndent: '0.8em',        // amount to indent tags
-                useLabelIds: true,         // use label name rather than tag for ids
-                maxMacros: 10000,          // maximum number of macro substitutions per expression
-                maxBuffer: 5 * 1024,       // maximum size for the internal TeX string (5K)
-                // baseURL:                   // URL for use with links to tags (when there is a <base> tag in effect)
-                // (document.getElementsByTagName('base').length === 0) ? '' : String(document.location).replace(/#.*$/, ''),
-                formatError:               // function called when TeX syntax errors occur
-                    (jax, err) => jax.formatError(err)
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .github { background-color: #333; }
+        .twitter { background-color: #1DA1F2; }
+        .itchio { background-color: #FA5C5C; }
+
+        section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: var(--section-spacing);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent), var(--primary));
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2 i {
+            color: var(--accent);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .game-image {
+            height: 180px;
+            background: linear-gradient(45deg, #6A7BFF, #8a2be2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-content {
+            padding: 1.5rem;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .game-description {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .game-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .md-content {
+            line-height: 1.8;
+        }
+
+        .md-content h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .md-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .md-content ul, .md-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .md-content a {
+            color: var(--primary);
+        }
+
+        .md-content code {
+            background-color: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #333;
+        }
+
+        .md-content pre {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .md-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: #666;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #eaeaea;
+        }
+
+        .skill-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .skill-list {
+            list-style-type: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #555;
+        }
+
+        .skill-list li::before {
+            content: '🎮';
+            font-size: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: var(--section-spacing);
+            color: #666;
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 0;
+            position: relative;
+        }
+
+        .media-container {
+            height: 400px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .media-container img,
+        .media-container video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .media-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+        }
+
+        .nav-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .media-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background-color: #f5f5f5;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background-color: var(--primary);
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .games-grid, .skills-grid {
+                grid-template-columns: 1fr;
             }
-        };
-    </script>
-    <script type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <!-- Core JS-->
-    <script type="text/javascript" src="static/js/scripts.js"></script>
-    <script type="text/javascript" src="static/js/js-yaml.min.js"></script>
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .media-container {
+                height: 300px;
+            }
+        }
 
+        /* 装饰元素 */
+        .decoration {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.1;
+            font-size: 15vw;
+        }
+
+        .decoration-1 {
+            top: 5%;
+            left: 5%;
+            color: var(--primary);
+        }
+
+        .decoration-2 {
+            bottom: 5%;
+            right: 5%;
+            color: var(--secondary);
+        }
+    </style>
 </head>
+<body>
+    <!-- 装饰元素 -->
+    <div class="decoration decoration-1">🎮</div>
+    <div class="decoration decoration-2">👾</div>
 
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="header navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-        <div class="container px-5">
-            <a id="page-top-title" class="navbar-brand fw-bold" href="#page-top"></a>
-            <!-- <a href="#page-top"><img src="static/assets/img/CUMT_LOGO.svg" style="width: 11rem;"></a> -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                MENU
-                <i class="bi-list"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-3" href="#page-top">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-3" href="#publications">PUBLICATIONS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-3" href="#awards">AWARDS</a>
-                    </li>
-
-                </ul>
+    <div class="container">
+        <header>
+            <div class="avatar"><i class="fas fa-gamepad"></i></div>
+            <h1>游戏开发者</h1>
+            <p class="tagline">创造有趣体验的独立游戏开发者</p>
+            <div class="social-links">
+                <a href="#" class="social-btn github"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#" class="social-btn itchio"><i class="fas fa-gamepad"></i> Itch.io</a>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <!-- Top Section -->
-    <section class="top-section" style="background-image: url('static/assets/img/background.jpeg');">
-        <div class="top-section-content">
-            <div class="container px-5">
-                <h2 id="top-section-bg-text" class="text-white display-3 lh-1 font-alt"></h2>
+        <section id="about">
+            <h2><i class="fas fa-user"></i> 关于我</h2>
+            <div class="md-content" id="about-content">
+                <!-- Markdown内容将通过JavaScript加载 -->
+                正在加载内容...
             </div>
-        </div>
-    </section>
-    <!-- Top Section -->
+        </section>
 
-    <!-- Photo -->
-    <div class="container px-5">
-        <div id="avatar">
-            <img class="shadow" src="static/assets/img/photo.png">
+        <section id="games">
+            <h2><i class="fas fa-gamepad"></i> 游戏作品</h2>
+            <div class="games-grid">
+                <!-- 游戏卡片1 -->
+                <div class="game-card" data-media='["https://placehold.co/800x450/6A7BFF/white?text=Pixel+Adventure+Screenshot+1", "https://placehold.co/800x450/50C878/white?text=Pixel+Adventure+Screenshot+2", "https://placehold.co/800x450/FFA62E/white?text=Pixel+Adventure+Gameplay"]'>
+                    <div class="game-image">🎯</div>
+                    <div class="game-content">
+                        <h3 class="game-title">像素冒险</h3>
+                        <p class="game-description">一款复古风格的平台跳跃游戏，包含多个关卡和挑战。</p>
+                        <div class="game-links">
+                            <a href="#" class="btn">试玩</a>
+                            <a href="#" class="btn">源码</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 游戏卡片2 -->
+                <div class="game-card" data-media='["https://placehold.co/800x450/1DA1F2/white?text=Space+Shooter+Screenshot+1", "https://placehold.co/800x450/FF5252/white?text=Space+Shooter+Screenshot+2"]'>
+                    <div class="game-image">🚀</div>
+                    <div class="game-content">
+                        <h3 class="game-title">太空射击</h3>
+                        <p class="game-description">在太空与敌人作战，升级你的飞船，解锁强大武器。</p>
+                        <div class="game-links">
+                            <a href="#" class="btn">下载</a>
+                            <a href="#" class="btn">预告片</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 游戏卡片3 -->
+                <div class="game-card" data-media='["https://placehold.co/800x450/8A2BE2/white?text=Dragon+Legend+Screenshot+1", "https://placehold.co/800x450/50C878/white?text=Dragon+Legend+Screenshot+2", "https://placehold.co/800x450/FFA62E/white?text=Dragon+Legend+Screenshot+3", "https://placehold.co/800x450/1DA1F2/white?text=Dragon+Legend+Gameplay"]'>
+                    <div class="game-image">🐉</div>
+                    <div class="game-content">
+                        <h3 class="game-title">龙之传说</h3>
+                        <p class="game-description">角色扮演游戏，探索广阔世界，完成史诗任务。</p>
+                        <div class="game-links">
+                            <a href="#" class="btn">Steam</a>
+                            <a href="#" class="btn">社区</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2><i class="fas fa-code"></i> 技能专长</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="skill-title">编程语言</h3>
+                    <ul class="skill-list">
+                        <li>C# / Unity</li>
+                        <li>C++ / Unreal</li>
+                        <li>JavaScript</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-title">游戏设计</h3>
+                    <ul class="skill-list">
+                        <li>关卡设计</li>
+                        <li>游戏机制</li>
+                        <li>剧情叙事</li>
+                        <li>用户界面</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-title">美术设计</h3>
+                    <ul class="skill-list">
+                        <li>像素艺术</li>
+                        <li>3D建模</li>
+                        <li>动画制作</li>
+                        <li>UI/UX设计</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog">
+            <h2><i class="fas fa-book"></i> 开发日志</h2>
+            <div class="md-content" id="blog-content">
+                <!-- Markdown内容将通过JavaScript加载 -->
+                正在加载内容...
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2><i class="fas fa-envelope"></i> 联系我</h2>
+            <div class="md-content" id="contact-content">
+                <!-- Markdown内容将通过JavaScript加载 -->
+                正在加载内容...
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2023 游戏开发者 | 使用HTML、CSS和JavaScript构建</p>
+        </footer>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="mediaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">游戏截图</h3>
+                <button class="close-btn" id="closeModal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="media-container" id="mediaContainer">
+                    <img src="" alt="游戏媒体" id="currentMedia">
+                </div>
+                <div class="media-nav">
+                    <div class="nav-btn" id="prevMedia"><i class="fas fa-chevron-left"></i></div>
+                    <div class="nav-btn" id="nextMedia"><i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="media-indicators" id="mediaIndicators">
+                    <!-- 指示器将通过JavaScript动态生成 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p id="mediaCaption">游戏截图展示</p>
+            </div>
         </div>
     </div>
-    <!-- Photo -->
-    
-    <!-- Home -->
-    <section class="bg-gradient-primary-to-secondary-light mt5 md5" id="home">
-        <div class="container px-5">
-            <header>
-                <h2 id="home-subtitle"> </h2>
-                <!-- <span class="bi bi-list"></span> -->
-            </header>
-            <div class="main-body" id="home-md"></div>
-        </div>
-    </section>
-    <!-- Home -->
 
-    <!-- Publications -->
-    <section class="bg-gradient-primary-to-secondary-gray mt5 md5" id="publications">
-        <div class="container px-5">
-            <header>
-                <h2 id="publications-subtitle"><i class="bi bi-file-text-fill"></i>&nbsp;PUBLICATIONS</h2>
-            </header>
-            <div class="main-body" id="publications-md"></div>
+    <script>
+        // 模拟从外部加载Markdown内容
+        document.addEventListener('DOMContentLoaded', function() {
+            // 关于我部分的Markdown内容
+            const aboutMarkdown = `
+                我是一名充满热情的独立游戏开发者，专注于创造有趣和创新的游戏体验。
 
-        </div>
-    </section>
-    <!-- Publications  -->
+                ## 我的游戏开发之旅
+                - 2015年：开始学习游戏开发
+                - 2017年：发布第一款移动游戏
+                - 2019年：开始使用Unity引擎
+                - 2021年：全职投入独立游戏开发
+                - 2023年：成立小型游戏工作室
 
-    <!-- Awards -->
-    <section class="bg-gradient-primary-to-secondary-light mt5 md5" id="awards">
-        <div class="container px-5">
-            <header>
-                <h2 id="awards-subtitle"><i class="bi bi-award-fill"></i>AWARDS </h2>
-            </header>
-            <div class="main-body" id="awards-md"></div>
+                ## 开发理念
+                我相信游戏是艺术与技术的完美结合。我的目标是创造不仅有趣，而且能够触动玩家情感的游戏体验。
 
-        </div>
-    </section>
-    <!-- Awards -->
+                > "游戏不只是娱乐，它们是互动的艺术形式。" - 未知
+            `;
 
+            // 开发日志部分的Markdown内容
+            const blogMarkdown = `
+                ## 最新动态
 
-    <!-- Footer-->
-    <footer class="bg-bottom text-center py-5">
-        <div class="container px-5">
-            <div class="text-white-50 small">
-                <div id="copyright-text" class="mb-2"></div>
-                <a id="github-link" href="https://github.com/senli1073">Github</a>
-                <span class="mx-1">&middot;</span>
-                <a id="license-link" href="https://github.com/senli1073/senli1073.github.io/blob/main/LICENSE">License</a>
-            </div>
-        </div>
-    </footer>
+                ### 新项目预告
+                正在开发一款roguelike卡牌游戏，融合了DBG和RPG元素！
 
+                **主要特性：**
+                - 程序生成的地图和事件
+                - 200+张可收集卡牌
+                - 多种角色职业选择
+                - 丰富的剧情分支
+
+                ### 技术分享
+                最近实现了基于状态机的AI系统，大大提升了游戏中的敌人行为复杂度。
+
+                \`\`\`csharp
+                public class EnemyAI : MonoBehaviour {
+                    private IState currentState;
+                    
+                    void Update() {
+                        currentState.UpdateState();
+                    }
+                    
+                    public void ChangeState(IState newState) {
+                        currentState.ExitState();
+                        currentState = newState;
+                        currentState.EnterState();
+                    }
+                }
+                \`\`\`
+            `;
+
+            // 联系我部分的Markdown内容
+            const contactMarkdown = `
+                如果您对我的作品感兴趣，或者有合作意向，欢迎通过以下方式联系我：
+
+                - **电子邮件**: developer@example.com
+                - **Discord**: GameDev#1234
+                - **Twitter**: [@GameDeveloper](https://twitter.com/GameDeveloper)
+
+                我通常会在1-2个工作日内回复所有邮件。对于合作提案，请简要说明您的项目想法和合作方式。
+
+                也可以关注我的社交媒体账号，获取最新项目更新和开发日志！
+            `;
+
+            // 使用Marked.js解析Markdown
+            document.getElementById('about-content').innerHTML = marked.parse(aboutMarkdown);
+            document.getElementById('blog-content').innerHTML = marked.parse(blogMarkdown);
+            document.getElementById('contact-content').innerHTML = marked.parse(contactMarkdown);
+
+            // 媒体查看器功能
+            const modal = document.getElementById('mediaModal');
+            const closeModal = document.getElementById('closeModal');
+            const mediaContainer = document.getElementById('mediaContainer');
+            const currentMedia = document.getElementById('currentMedia');
+            const prevBtn = document.getElementById('prevMedia');
+            const nextBtn = document.getElementById('nextMedia');
+            const indicatorsContainer = document.getElementById('mediaIndicators');
+            const modalTitle = document.getElementById('modalTitle');
+            const mediaCaption = document.getElementById('mediaCaption');
+
+            let currentMediaIndex = 0;
+            let mediaItems = [];
+
+            // 为每个游戏卡片添加点击事件
+            document.querySelectorAll('.game-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const mediaData = JSON.parse(this.getAttribute('data-media'));
+                    const gameTitle = this.querySelector('.game-title').textContent;
+                    
+                    openMediaViewer(mediaData, gameTitle);
+                });
+            });
+
+            // 打开媒体查看器
+            function openMediaViewer(mediaArray, title) {
+                mediaItems = mediaArray;
+                currentMediaIndex = 0;
+                
+                modalTitle.textContent = title;
+                updateMedia();
+                
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            // 更新媒体显示
+            function updateMedia() {
+                currentMedia.src = mediaItems[currentMediaIndex];
+                mediaCaption.textContent = `截图 ${currentMediaIndex + 1} / ${mediaItems.length}`;
+                
+                // 更新指示器
+                indicatorsContainer.innerHTML = '';
+                for (let i = 0; i < mediaItems.length; i++) {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'indicator';
+                    if (i === currentMediaIndex) {
+                        indicator.classList.add('active');
+                    }
+                    indicator.addEventListener('click', () => {
+                        currentMediaIndex = i;
+                        updateMedia();
+                    });
+                    indicatorsContainer.appendChild(indicator);
+                }
+            }
+
+            // 下一张媒体
+            nextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentMediaIndex = (currentMediaIndex + 1) % mediaItems.length;
+                updateMedia();
+            });
+
+            // 上一张媒体
+            prevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentMediaIndex = (currentMediaIndex - 1 + mediaItems.length) % mediaItems.length;
+                updateMedia();
+            });
+
+            // 关闭模态框
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            // 点击模态框背景关闭
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // 键盘导航
+            document.addEventListener('keydown', function(e) {
+                if (modal.style.display === 'flex') {
+                    if (e.key === 'ArrowRight') {
+                        currentMediaIndex = (currentMediaIndex + 1) % mediaItems.length;
+                        updateMedia();
+                    } else if (e.key === 'ArrowLeft') {
+                        currentMediaIndex = (currentMediaIndex - 1 + mediaItems.length) % mediaItems.length;
+                        updateMedia();
+                    } else if (e.key === 'Escape') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
