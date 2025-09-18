@@ -47,7 +47,7 @@
             text-align: center;
             padding: 2rem 0;
             margin-bottom: var(--section-spacing);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0);
             border-radius: var(--border-radius);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
@@ -106,11 +106,11 @@
         }
 
         .github { background-color: #333; }
-        .twitter { background-color: #1DA1F2; }
-        .itchio { background-color: #FA5C5C; }
+        .QQ { background-color: #1DA1F2; }
+        .CSDN { background-color: #FA5C5C; }
 
         section {
-            background-color: white;
+            background-color: rgba(238, 244, 255, 0.735);
             border-radius: var(--border-radius);
             padding: 2rem;
             margin-bottom: var(--section-spacing);
@@ -239,8 +239,11 @@
         .tag.shader { background-color: #50C878; }
         .tag.algorithm { background-color: #1DA1F2; }
         .tag.godot { background-color: #478CBF; }
-        .tag['c++'] { background-color: #00599C; }
+        .tag.cplus\+ {
+            background-color: #00599C;
+        }
         .tag.多线程 { background-color: #FF6B6B; }
+        .tag.c\# { background-color: #147349; }
 
         /* 预览图片区域 */
         .preview-images {
@@ -491,18 +494,17 @@
 
     <div class="container">
         <header>
-            <div class="avatar"><i class="fas fa-gamepad"></i></div>
-            <h1>游戏开发者</h1>
-            <p class="tagline">创造有趣体验的独立游戏开发者</p>
+            
+            <h1>SCLChuck</h1>
             <div class="social-links">
-                <a href="#" class="social-btn github"><i class="fab fa-github"></i> GitHub</a>
-                <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="#" class="social-btn itchio"><i class="fas fa-gamepad"></i> Itch.io</a>
+                <a href="https://github.com/sclchuck" class="social-btn github">GitHub</a>
+                <a href="#" class="social-btn QQ"> QQ : 1004663825</a>
+                <a href="https://blog.csdn.net/qq_31805591?spm=1000.2115.3001.5343" class="social-btn CSDN"> CSDN</a>
             </div>
         </header>
 
         <section id="games">
-            <h2><i class="fas fa-gamepad"></i> 游戏作品</h2>
+            <h2><i class="fas fa-gamepad"></i> 作品集</h2>
             <div class="games-grid" id="games-container">
                 <!-- 游戏卡片将通过JavaScript动态添加 -->
             </div>
@@ -605,13 +607,13 @@
                     ]
                 },
                 {
-                    mainImage: "static/assets/MrWolf/MrWolfTitle.png",
+                    mainImage: "static/assets/Next20s/Title.png",
                     mainImageType: "img",
                     gridX: 7,
                     gridY: 1,
                     gridWidth: 2,
                     gridHeight: 1,
-                    title: "MrWolf",
+                    title: "Next20s",
                     description: "2024CiGAGameJam比赛项目类吸血鬼幸存者游戏，合理运用移动与射击，操控主角生存到最后",
                     tags: ["Unity", "C#", "Shader"],
                     mediaList: [
@@ -622,44 +624,105 @@
                         },
                     ]
                 },
-                {
-                    mainImage: "static/assets/StarStation/StarStationTitle.png",
+                                {
+                    mainImage: "static/assets/School/Title.png",
+                    mainImageType: "img",
+                    gridX: 1,
+                    gridY: 2,
+                    gridWidth: 2,
+                    gridHeight: 2,
+                    title: "《美梦中学2024-2025年度秋季学期理综期末考试》",
+                    description: "2024吉比特GameJam比赛项目 \
+                        你是美梦中学一名高二即将升高三的学生。这天，在期末复习课上，你有一个朋友李华因为昨晚通宵游玩一款叫做“美梦中学2024-2025年度秋季学期理综期末考试”的弹幕射击游戏，而昏昏欲睡。你要进入梦中击败缠绕他（你）的梦魇，守护你朋友的美梦，让他（你）安眠到下课。",
+                    tags: ["Unity", "C#", "Shader"],
+                    mediaList: [
+                        { 
+                            url: "BV1cMrhYPEDv", 
+                            caption: "玩法介绍",
+                            type: "bilibili"
+                        },
+                    ]
+                },
+                                {
+                    mainImage: "static/assets/WonderingCode/Title.png",
                     mainImageType: "img",
                     gridX: 3,
                     gridY: 2,
-                    gridWidth: 3,
+                    gridWidth: 2,
                     gridHeight: 2,
-                    title: "StarStation",
-                    description: "一个Blender制作的小片段，主要使用噪声贴图生成材质和几何节点",
-                    tags: ["Blender", "Shader"],
+                    title: "Next20s",
+                    description: "2025 CiGA GameJam比赛项目 \
+                        半夜刚赶完论文后打开vscode后发现眼前熟悉的代码活了起来，于是我变身成黄豆人穿越到代码世界进行了一次奇幻冒险。",
+                    tags: ["Unity", "C#", "Shader"],
                     mediaList: [
                         { 
-                            url: "BV1w4pezVEUG", 
-                            caption: "",
+                            url: "BV17U3wzmEFS", 
+                            caption: "玩法介绍",
                             type: "bilibili"
                         },
                     ]
                 },
                 {
-                    mainImage: "static/assets/OpenGL/1.jpg",
+                    mainImage: "static/assets/StarStation/StarStationTitle.png",
                     mainImageType: "img",
-                    gridX: 1,
-                    gridY: 4,
-                    gridWidth: 3,
-                    gridHeight:2,
+                    gridX: 5,
+                    gridY: 2,
+                    gridWidth: 4,
+                    gridHeight: 1,
                     title: "StarStation",
-                    description: "一个由自己使用C++实现的光影算法。用于熟悉图形渲染API底层。",
-                    tags: ["OpenGL", "Shader", "C++", "Imgui"],
+                    description: "一个Blender制作的小片段，该片段未使用任何外部纹理。仅使用噪声贴图+着色器生成材质, 使用几何节点+噪声来配合着色器来生成特效（例如恒星和飞船尾焰）。",
+                    tags: ["Blender", "Shader"],
                     mediaList: [
                         { 
-                            url: "static/assets/OpenGL/1.jpg", 
-                            caption: "冯氏光照1",
-                            type: "img"
+                            url: "BV1w4pezVEUG", 
+                            caption: "视频演示",
+                            type: "bilibili"
+                        },
+                    ]
+                },
+                {
+                    mainImage: "static/assets/GodotPlanet/Title.jpg",
+                    mainImageType: "img",
+                    gridX: 5,
+                    gridY: 3,
+                    gridWidth: 2,
+                    gridHeight:2,
+                    title: "Godot Planet Demo",
+                    description: "使用Godot制作的一个星球生成器。可参数化生成高度贴图进行渲染。",
+                    tags: ["Godot", "Shader"],
+                    mediaList: [
+                        { 
+                            url: "static/assets/GodotPlanet/1.mp4", 
+                            caption: "整体演示",
+                            type: "video"
                         },
                         { 
-                            url: "static/assets/OpenGL/1.jpg", 
-                            caption: "冯氏光照2",
-                            type: "img"
+                            url: "static/assets/GodotPlanet/2.mp4", 
+                            caption: "参数化演示",
+                            type: "video"
+                        },
+                    ]
+                },
+                {
+                    mainImage: "static/assets/GodotSnow/Title.jpg",
+                    mainImageType: "img",
+                    gridX: 7,
+                    gridY: 3,
+                    gridWidth: 2,
+                    gridHeight:2,
+                    title: "Godot Snow Demo",
+                    description: "使用Godot制作的一个雪地轨迹显示。模拟物体走过雪地，雪被踏平。可以参数化控制效果。",
+                    tags: ["Godot", "Shader"],
+                    mediaList: [
+                        { 
+                            url: "static/assets/GodotSnow/1.mp4", 
+                            caption: "整体演示",
+                            type: "video"
+                        },
+                        { 
+                            url: "static/assets/GodotSnow/2.mp4", 
+                            caption: "参数化演示",
+                            type: "video"
                         },
                     ]
                 },
@@ -668,9 +731,9 @@
                     mainImageType: "img",
                     gridX: 1,
                     gridY: 4,
-                    gridWidth: 3,
+                    gridWidth: 4,
                     gridHeight:2,
-                    title: "OpenGLDemo",
+                    title: "StarStation",
                     description: "一个由自己使用C++实现的光影算法。用于熟悉图形渲染API底层。",
                     tags: ["OpenGL", "Shader", "C++", "Imgui"],
                     mediaList: [
@@ -685,7 +748,69 @@
                             type: "img"
                         },
                     ]
-                }
+                },
+                {
+                    mainImage: "static/assets/Tween/Title.png",
+                    mainImageType: "img",
+                    gridX: 5,
+                    gridY: 5,
+                    gridWidth: 2,
+                    gridHeight:2,
+                    title: "Unity Tween",
+                    description: "为Unity模仿Godot3.X写的一个Tween component，用于快捷的在代码里面创建执行队列和动画。支持各种常见插值方式。",
+                    tags: ["Unity", "C#"],
+                    mediaList: [
+                        { 
+                            url: "static/assets/Tween/t1.png", 
+                            caption: "注册各种类型作为合法的插值对象",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/Tween/t2.png", 
+                            caption: "使用链式调用创建一个执行队列。",
+                            type: "img"
+                        },
+                    ]
+                },
+                {
+                    mainImage: "static/assets/JsonFunc/j0.png",
+                    mainImageType: "img",
+                    gridX: 7,
+                    gridY: 5,
+                    gridWidth: 2,
+                    gridHeight:2,
+                    title: "Json Function",
+                    description: "由Paradox脚本启发。用户可以用Json表示函数，利用Json实现函数扩展C++程序。实现了C++和Json函数之间的相互调用。C++在加载JSON函数时，会将Json函数体各个词元编译为整数索引，并提前计算出所需栈内存，相对于直接字符串索引更加高效。",
+                    tags: ["C++"],
+                    mediaList: [
+                        { 
+                            url: "static/assets/JsonFunc/j0.png", 
+                            caption: "C++函数注册以及加载JSON文件",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/JsonFunc/j11.png", 
+                            caption: "Json函数的实现",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/JsonFunc/j12.png", 
+                            caption: "Json函数的实现",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/JsonFunc/j2.png", 
+                            caption: "C++调用Json函数",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/JsonFunc/jr.png", 
+                            caption: "执行结果",
+                            type: "img"
+                        },
+                    ]
+                },,
+                
             ];
 
             // 添加游戏卡片到网格
@@ -871,7 +996,7 @@
                 if (mainImageType === 'video') {
                     mediaElement = `<video muted loop><source src="${mainImage}" type="video/mp4"></video>`;
                 } else {
-                    mediaElement = `<img src="${mainImage}" alt="${title}" onerror="this.src='https://placehold.co/600x400/6A7BFF/white?text=Image+Not+Found'">`;
+                    mediaElement = `<img src="${mainImage}" alt="${title}" onerror="this.src='static/assets/Video.svg'">`;
                 }
                 
                 card.innerHTML = `
@@ -889,9 +1014,9 @@
                             ${mediaList.slice(0, 3).map((media, index) => {
                                 let previewSrc = '';
                                 if (media.type === 'bilibili') {
-                                    previewSrc = 'https://placehold.co/40x40/00A1D6/white?text=B';
+                                    previewSrc = 'static/assets/Video.svg';
                                 } else if (media.type === 'video') {
-                                    previewSrc = 'https://placehold.co/40x40/FF0000/white?text=▶';
+                                    previewSrc = 'static/assets/Video.svg';
                                 } else {
                                     previewSrc = media.url;
                                 }
