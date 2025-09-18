@@ -38,7 +38,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 80%;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -145,7 +145,7 @@
         /* 游戏网格布局 */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(8, 1fr);
             grid-auto-rows: minmax(200px, auto);
             gap: 1.5rem;
         }
@@ -178,10 +178,23 @@
             overflow: hidden;
         }
 
-        .game-image img {
+        .game-image img,
+        .game-image video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .media-type-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
 
         .game-content {
@@ -203,26 +216,31 @@
             flex-grow: 1;
         }
 
-        .game-links {
+        /* 标签区域 */
+        .game-tags {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
 
-        .btn {
-            padding: 0.5rem 1rem;
+        .tag {
+            padding: 0.3rem 0.6rem;
             background-color: var(--primary);
             color: white;
-            text-decoration: none;
-            border-radius: var(--border-radius);
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
 
-        .btn:hover {
-            background-color: var(--secondary);
-            color: white;
-        }
+        .tag.unity { background-color: #000000; }
+        .tag.csharp { background-color: #682876; }
+        .tag.rpg { background-color: #FFA62E; }
+        .tag.shader { background-color: #50C878; }
+        .tag.algorithm { background-color: #1DA1F2; }
+        .tag.godot { background-color: #478CBF; }
+        .tag['c++'] { background-color: #00599C; }
+        .tag.多线程 { background-color: #FF6B6B; }
 
         /* 预览图片区域 */
         .preview-images {
@@ -260,89 +278,6 @@
             font-weight: bold;
         }
 
-        .md-content {
-            line-height: 1.8;
-        }
-
-        .md-content h3 {
-            color: var(--secondary);
-            margin: 1.5rem 0 0.5rem;
-        }
-
-        .md-content p {
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        .md-content ul, .md-content ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        .md-content a {
-            color: var(--primary);
-        }
-
-        .md-content code {
-            background-color: #f5f5f5;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: monospace;
-            color: #333;
-        }
-
-        .md-content pre {
-            background-color: #f5f5f5;
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            overflow-x: auto;
-            margin-bottom: 1rem;
-        }
-
-        .md-content blockquote {
-            border-left: 4px solid var(--primary);
-            padding-left: 1rem;
-            margin-left: 0;
-            color: #666;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            border: 1px solid #eaeaea;
-        }
-
-        .skill-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .skill-list {
-            list-style-type: none;
-        }
-
-        .skill-list li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #555;
-        }
-
-        .skill-list li::before {
-            content: '🎮';
-            font-size: 0.8rem;
-        }
-
         footer {
             text-align: center;
             padding: 2rem 0;
@@ -368,7 +303,7 @@
             background-color: white;
             border-radius: var(--border-radius);
             width: 90%;
-            max-width: 800px;
+            max-width: 900px;
             max-height: 90vh;
             overflow: hidden;
             position: relative;
@@ -397,7 +332,7 @@
         }
 
         .media-container {
-            height: 400px;
+            height: 500px;
             background-color: #000;
             display: flex;
             align-items: center;
@@ -406,9 +341,15 @@
         }
 
         .media-container img,
+        .media-container video,
+        .media-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .media-container img,
         .media-container video {
-            max-width: 100%;
-            max-height: 100%;
             object-fit: contain;
         }
 
@@ -433,6 +374,7 @@
             justify-content: center;
             cursor: pointer;
             transition: background-color 0.3s;
+            z-index: 10;
         }
 
         .nav-btn:hover {
@@ -462,6 +404,19 @@
         .modal-footer {
             padding: 1rem;
             background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .media-caption {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .media-index {
+            color: #666;
+            font-size: 0.9rem;
         }
 
         .close-btn {
@@ -546,69 +501,10 @@
             </div>
         </header>
 
-        <section id="about">
-            <h2><i class="fas fa-user"></i> 关于我</h2>
-            <div class="md-content" id="about-content">
-                <!-- Markdown内容将通过JavaScript加载 -->
-                正在加载内容...
-            </div>
-        </section>
-
         <section id="games">
             <h2><i class="fas fa-gamepad"></i> 游戏作品</h2>
             <div class="games-grid" id="games-container">
                 <!-- 游戏卡片将通过JavaScript动态添加 -->
-            </div>
-        </section>
-
-        <section id="skills">
-            <h2><i class="fas fa-code"></i> 技能专长</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 class="skill-title">编程语言</h3>
-                    <ul class="skill-list">
-                        <li>C# / Unity</li>
-                        <li>C++ / Unreal</li>
-                        <li>JavaScript</li>
-                        <li>Python</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 class="skill-title">游戏设计</h3>
-                    <ul class="skill-list">
-                        <li>关卡设计</li>
-                        <li>游戏机制</li>
-                        <li>剧情叙事</li>
-                        <li>用户界面</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 class="skill-title">美术设计</h3>
-                    <ul class="skill-list">
-                        <li>像素艺术</li>
-                        <li>3D建模</li>
-                        <li>动画制作</li>
-                        <li>UI/UX设计</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="blog">
-            <h2><i class="fas fa-book"></i> 开发日志</h2>
-            <div class="md-content" id="blog-content">
-                <!-- Markdown内容将通过JavaScript加载 -->
-                正在加载内容...
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2><i class="fas fa-envelope"></i> 联系我</h2>
-            <div class="md-content" id="contact-content">
-                <!-- Markdown内容将通过JavaScript加载 -->
-                正在加载内容...
             </div>
         </section>
 
@@ -621,12 +517,12 @@
     <div class="modal" id="mediaModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modalTitle">游戏截图</h3>
+                <h3 id="modalTitle">游戏媒体</h3>
                 <button class="close-btn" id="closeModal"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <div class="media-container" id="mediaContainer">
-                    <img src="" alt="游戏媒体" id="currentMedia">
+                    <!-- 媒体内容将通过JavaScript动态添加 -->
                 </div>
                 <div class="media-nav">
                     <div class="nav-btn" id="prevMedia"><i class="fas fa-chevron-left"></i></div>
@@ -637,153 +533,157 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <p id="mediaCaption">游戏截图展示</p>
+                <p class="media-caption" id="mediaCaption">游戏媒体展示</p>
+                <p class="media-index" id="mediaIndex">1 / 5</p>
             </div>
         </div>
     </div>
 
     <script>
-        // 模拟从外部加载Markdown内容
         document.addEventListener('DOMContentLoaded', function() {
-            // 关于我部分的Markdown内容
-            const aboutMarkdown = `
-                我是一名充满热情的独立游戏开发者，专注于创造有趣和创新的游戏体验。
-
-                ## 我的游戏开发之旅
-                - 2015年：开始学习游戏开发
-                - 2017年：发布第一款移动游戏
-                - 2019年：开始使用Unity引擎
-                - 2021年：全职投入独立游戏开发
-                - 2023年：成立小型游戏工作室
-
-                ## 开发理念
-                我相信游戏是艺术与技术的完美结合。我的目标是创造不仅有趣，而且能够触动玩家情感的游戏体验。
-
-                > "游戏不只是娱乐，它们是互动的艺术形式。" - 未知
-            `;
-
-            // 开发日志部分的Markdown内容
-            const blogMarkdown = `
-                ## 最新动态
-
-                ### 新项目预告
-                正在开发一款roguelike卡牌游戏，融合了DBG和RPG元素！
-
-                **主要特性：**
-                - 程序生成的地图和事件
-                - 200+张可收集卡牌
-                - 多种角色职业选择
-                - 丰富的剧情分支
-
-                ### 技术分享
-                最近实现了基于状态机的AI系统，大大提升了游戏中的敌人行为复杂度。
-
-                \`\`\`csharp
-                public class EnemyAI : MonoBehaviour {
-                    private IState currentState;
-                    
-                    void Update() {
-                        currentState.UpdateState();
-                    }
-                    
-                    public void ChangeState(IState newState) {
-                        currentState.ExitState();
-                        currentState = newState;
-                        currentState.EnterState();
-                    }
-                }
-                \`\`\`
-            `;
-
-            // 联系我部分的Markdown内容
-            const contactMarkdown = `
-                如果您对我的作品感兴趣，或者有合作意向，欢迎通过以下方式联系我：
-
-                - **电子邮件**: developer@example.com
-                - **Discord**: GameDev#1234
-                - **Twitter**: [@GameDeveloper](https://twitter.com/GameDeveloper)
-
-                我通常会在1-2个工作日内回复所有邮件。对于合作提案，请简要说明您的项目想法和合作方式。
-
-                也可以关注我的社交媒体账号，获取最新项目更新和开发日志！
-            `;
-
-            // 使用Marked.js解析Markdown
-            document.getElementById('about-content').innerHTML = marked.parse(aboutMarkdown);
-            document.getElementById('blog-content').innerHTML = marked.parse(blogMarkdown);
-            document.getElementById('contact-content').innerHTML = marked.parse(contactMarkdown);
-
             // 游戏卡片数据
             const gamesData = [
                 {
-                    mainImage: "https://placehold.co/600x400/6A7BFF/white?text=Pixel+Adventure",
+                    mainImage: "static/assets/TheCrown/TheCrowTitle.png",
+                    mainImageType: "img",
                     gridX: 1,
                     gridY: 1,
-                    gridWidth: 2,
-                    gridHeight: 2,
-                    title: "像素冒险",
-                    description: "一款复古风格的平台跳跃游戏，包含多个关卡和挑战。",
+                    gridWidth: 4,
+                    gridHeight: 1,
+                    title: "The Crown",
+                    description: "一款使用Godot个人开发横版RPG游戏。操控主角与怪物战斗，升级并学习新的技能。与NPC对话购买商品。视觉方面实现了动态水体渲染，与Tilemap光影算法等。",
+                    tags: ["Godot", "GDScript", "C++", "多线程", "Shader"],
                     mediaList: [
-                        "https://placehold.co/800x450/6A7BFF/white?text=Pixel+Adventure+Screenshot+1",
-                        "https://placehold.co/800x450/50C878/white?text=Pixel+Adventure+Screenshot+2",
-                        "https://placehold.co/800x450/FFA62E/white?text=Pixel+Adventure+Gameplay",
-                        "https://placehold.co/800x450/8A2BE2/white?text=Pixel+Adventure+Level+Design"
+                        { 
+                            url: "BV1NwpvzEEhn", 
+                            caption: "游戏的视频演示",
+                            type: "bilibili"
+                        },
+                        { 
+                            url: "static/assets/TheCrown/TheCrownWater.mp4", 
+                            caption: "动态水体演示",
+                            type: "video"
+                        },
+                        { 
+                            url: "static/assets/TheCrown/TheCrowTitle.png", 
+                            caption: "游戏中的一个boss战",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/TheCrown/TheCrownShadow.png", 
+                            caption: "早期Tilemap光影算法, 左边为原始图，右边为阴影图",
+                            type: "img"
+                        }
                     ]
                 },
                 {
-                    mainImage: "https://placehold.co/600x400/1DA1F2/white?text=Space+Shooter",
-                    gridX: 3,
+                    mainImage: "static/assets/MrWolf/MrWolfTitle.png",
+                    mainImageType: "img",
+                    gridX: 5,
                     gridY: 1,
                     gridWidth: 2,
                     gridHeight: 1,
-                    title: "太空射击",
-                    description: "在太空与敌人作战，升级你的飞船，解锁强大武器。",
+                    title: "MrWolf",
+                    description: "保时捷Jam，扮演小查理，展开与狼先生的故事。作为程序员+技美参加",
+                    tags: ["Unity", "C#", "Shader"],
                     mediaList: [
-                        "https://placehold.co/800x450/1DA1F2/white?text=Space+Shooter+Screenshot+1",
-                        "https://placehold.co/800x450/FF5252/white?text=Space+Shooter+Screenshot+2"
+                        { 
+                            url: "static/assets/MrWolf/MrWolfColorLock.mp4", 
+                            caption: "颜色锁玩法",
+                            type: "video"
+                        },
+                        { 
+                            url: "static/assets/MrWolf/MrWolfTrans.mp4", 
+                            caption: "回忆变身滤镜",
+                            type: "video"
+                        },
+                        { 
+                            url: "static/assets/MrWolf/MrWolfLighting.mp4", 
+                            caption: "场景光效",
+                            type: "video"
+                        },
                     ]
                 },
                 {
-                    mainImage: "https://placehold.co/600x400/8A2BE2/white?text=Dragon+Legend",
-                    gridX: 1,
-                    gridY: 3,
+                    mainImage: "static/assets/MrWolf/MrWolfTitle.png",
+                    mainImageType: "img",
+                    gridX: 7,
+                    gridY: 1,
+                    gridWidth: 2,
+                    gridHeight: 1,
+                    title: "MrWolf",
+                    description: "2024CiGAGameJam比赛项目类吸血鬼幸存者游戏，合理运用移动与射击，操控主角生存到最后",
+                    tags: ["Unity", "C#", "Shader"],
+                    mediaList: [
+                        { 
+                            url: "BV1GchDePEsC", 
+                            caption: "玩法介绍",
+                            type: "bilibili"
+                        },
+                    ]
+                },
+                {
+                    mainImage: "static/assets/StarStation/StarStationTitle.png",
+                    mainImageType: "img",
+                    gridX: 3,
+                    gridY: 2,
                     gridWidth: 3,
                     gridHeight: 2,
-                    title: "龙之传说",
-                    description: "角色扮演游戏，探索广阔世界，完成史诗任务。",
+                    title: "StarStation",
+                    description: "一个Blender制作的小片段，主要使用噪声贴图生成材质和几何节点",
+                    tags: ["Blender", "Shader"],
                     mediaList: [
-                        "https://placehold.co/800x450/8A2BE2/white?text=Dragon+Legend+Screenshot+1",
-                        "https://placehold.co/800x450/50C878/white?text=Dragon+Legend+Screenshot+2",
-                        "https://placehold.co/800x450/FFA62E/white?text=Dragon+Legend+Screenshot+3",
-                        "https://placehold.co/800x450/1DA1F2/white?text=Dragon+Legend+Gameplay",
-                        "https://placehold.co/800x450/6A7BFF/white?text=Dragon+Legend+Map"
+                        { 
+                            url: "BV1w4pezVEUG", 
+                            caption: "",
+                            type: "bilibili"
+                        },
                     ]
                 },
                 {
-                    mainImage: "https://placehold.co/600x400/50C878/white?text=Forest+Runners",
-                    gridX: 4,
-                    gridY: 2,
-                    gridWidth: 2,
-                    gridHeight: 1,
-                    title: "森林跑者",
-                    description: "快节奏的跑酷游戏，在森林中穿梭躲避障碍。",
+                    mainImage: "static/assets/OpenGL/1.jpg",
+                    mainImageType: "img",
+                    gridX: 1,
+                    gridY: 4,
+                    gridWidth: 3,
+                    gridHeight:2,
+                    title: "StarStation",
+                    description: "一个由自己使用C++实现的光影算法。用于熟悉图形渲染API底层。",
+                    tags: ["OpenGL", "Shader", "C++", "Imgui"],
                     mediaList: [
-                        "https://placehold.co/800x450/50C878/white?text=Forest+Runners+Screenshot+1",
-                        "https://placehold.co/800x450/FFA62E/white?text=Forest+Runners+Screenshot+2"
+                        { 
+                            url: "static/assets/OpenGL/1.jpg", 
+                            caption: "冯氏光照1",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/OpenGL/1.jpg", 
+                            caption: "冯氏光照2",
+                            type: "img"
+                        },
                     ]
                 },
                 {
-                    mainImage: "https://placehold.co/600x400/FFA62E/white?text=Magic+Puzzle",
-                    gridX: 4,
-                    gridY: 3,
-                    gridWidth: 2,
-                    gridHeight: 2,
-                    title: "魔法谜题",
-                    description: "解谜游戏，使用魔法解决各种难题。",
+                    mainImage: "static/assets/OpenGL/1.jpg",
+                    mainImageType: "img",
+                    gridX: 1,
+                    gridY: 4,
+                    gridWidth: 3,
+                    gridHeight:2,
+                    title: "OpenGLDemo",
+                    description: "一个由自己使用C++实现的光影算法。用于熟悉图形渲染API底层。",
+                    tags: ["OpenGL", "Shader", "C++", "Imgui"],
                     mediaList: [
-                        "https://placehold.co/800x450/FFA62E/white?text=Magic+Puzzle+Screenshot+1",
-                        "https://placehold.co/800x450/6A7BFF/white?text=Magic+Puzzle+Screenshot+2",
-                        "https://placehold.co/800x450/8A2BE2/white?text=Magic+Puzzle+Gameplay"
+                        { 
+                            url: "static/assets/OpenGL/1.jpg", 
+                            caption: "冯氏光照1",
+                            type: "img"
+                        },
+                        { 
+                            url: "static/assets/OpenGL/2.jpg", 
+                            caption: "冯氏光照2",
+                            type: "img"
+                        },
                     ]
                 }
             ];
@@ -793,12 +693,14 @@
             gamesData.forEach(game => {
                 addGameCard(
                     game.mainImage,
+                    game.mainImageType,
                     game.gridX,
                     game.gridY,
                     game.gridWidth,
                     game.gridHeight,
                     game.title,
                     game.description,
+                    game.tags,
                     game.mediaList
                 );
             });
@@ -807,12 +709,12 @@
             const modal = document.getElementById('mediaModal');
             const closeModal = document.getElementById('closeModal');
             const mediaContainer = document.getElementById('mediaContainer');
-            const currentMedia = document.getElementById('currentMedia');
             const prevBtn = document.getElementById('prevMedia');
             const nextBtn = document.getElementById('nextMedia');
             const indicatorsContainer = document.getElementById('mediaIndicators');
             const modalTitle = document.getElementById('modalTitle');
             const mediaCaption = document.getElementById('mediaCaption');
+            const mediaIndex = document.getElementById('mediaIndex');
 
             let currentMediaIndex = 0;
             let mediaItems = [];
@@ -835,8 +737,34 @@
 
             // 更新媒体显示
             function updateMedia() {
-                currentMedia.src = mediaItems[currentMediaIndex];
-                mediaCaption.textContent = `截图 ${currentMediaIndex + 1} / ${mediaItems.length}`;
+                // 清空媒体容器
+                mediaContainer.innerHTML = '';
+                
+                const currentMedia = mediaItems[currentMediaIndex];
+                
+                // 根据媒体类型创建元素
+                if (currentMedia.type === 'video') {
+                    const video = document.createElement('video');
+                    video.src = currentMedia.url;
+                    video.controls = true;
+                    video.autoplay = true;
+                    mediaContainer.appendChild(video);
+                } else if (currentMedia.type === 'bilibili') {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `//player.bilibili.com/player.html?bvid=${currentMedia.url}&autoplay=1&danmaku=0`;
+                    iframe.scrolling = 'no';
+                    iframe.frameBorder = 'no';
+                    iframe.allowFullscreen = true;
+                    mediaContainer.appendChild(iframe);
+                } else {
+                    const img = document.createElement('img');
+                    img.src = currentMedia.url;
+                    img.alt = "游戏媒体";
+                    mediaContainer.appendChild(img);
+                }
+                
+                mediaCaption.textContent = currentMedia.caption;
+                mediaIndex.textContent = `${currentMediaIndex + 1} / ${mediaItems.length}`;
                 
                 // 更新指示器
                 indicatorsContainer.innerHTML = '';
@@ -873,6 +801,11 @@
                 modal.classList.remove('show');
                 setTimeout(() => {
                     modal.style.display = 'none';
+                    // 停止所有视频播放
+                    const videos = mediaContainer.querySelectorAll('video');
+                    videos.forEach(video => {
+                        video.pause();
+                    });
                 }, 300);
                 document.body.style.overflow = 'auto';
             });
@@ -883,6 +816,11 @@
                     modal.classList.remove('show');
                     setTimeout(() => {
                         modal.style.display = 'none';
+                        // 停止所有视频播放
+                        const videos = mediaContainer.querySelectorAll('video');
+                        videos.forEach(video => {
+                            video.pause();
+                        });
                     }, 300);
                     document.body.style.overflow = 'auto';
                 }
@@ -901,6 +839,11 @@
                         modal.classList.remove('show');
                         setTimeout(() => {
                             modal.style.display = 'none';
+                            // 停止所有视频播放
+                            const videos = mediaContainer.querySelectorAll('video');
+                            videos.forEach(video => {
+                                video.pause();
+                            });
                         }, 300);
                         document.body.style.overflow = 'auto';
                     }
@@ -908,7 +851,7 @@
             });
 
             // 添加游戏卡片的函数
-            function addGameCard(mainImage, gridX, gridY, gridWidth, gridHeight, title, description, mediaList) {
+            function addGameCard(mainImage, mainImageType, gridX, gridY, gridWidth, gridHeight, title, description, tags, mediaList) {
                 const card = document.createElement('div');
                 card.className = 'game-card';
                 card.style.gridColumn = `${gridX} / span ${gridWidth}`;
@@ -918,22 +861,42 @@
                 card.setAttribute('data-media', JSON.stringify(mediaList));
                 card.setAttribute('data-title', title);
                 
+                // 创建标签HTML
+                const tagsHTML = tags.map(tag => 
+                    `<span class="tag ${tag.toLowerCase().replace('+', 'plus').replace(' ', '-')}">${tag}</span>`
+                ).join('');
+                
                 // 创建卡片内容
+                let mediaElement = '';
+                if (mainImageType === 'video') {
+                    mediaElement = `<video muted loop><source src="${mainImage}" type="video/mp4"></video>`;
+                } else {
+                    mediaElement = `<img src="${mainImage}" alt="${title}" onerror="this.src='https://placehold.co/600x400/6A7BFF/white?text=Image+Not+Found'">`;
+                }
+                
                 card.innerHTML = `
                     <div class="game-image">
-                        <img src="${mainImage}" alt="${title}">
+                        ${mediaElement}
+                        <div class="media-type-badge">${mainImageType === 'video' ? '视频' : '图片'}</div>
                     </div>
                     <div class="game-content">
                         <h3 class="game-title">${title}</h3>
                         <p class="game-description">${description}</p>
-                        <div class="game-links">
-                            <a href="#" class="btn">查看详情</a>
-                            <a href="#" class="btn">试玩</a>
+                        <div class="game-tags">
+                            ${tagsHTML}
                         </div>
                         <div class="preview-images">
-                            ${mediaList.slice(0, 3).map((img, index) => 
-                                `<img src="${img}" class="preview-img" alt="预览图 ${index+1}">`
-                            ).join('')}
+                            ${mediaList.slice(0, 3).map((media, index) => {
+                                let previewSrc = '';
+                                if (media.type === 'bilibili') {
+                                    previewSrc = 'https://placehold.co/40x40/00A1D6/white?text=B';
+                                } else if (media.type === 'video') {
+                                    previewSrc = 'https://placehold.co/40x40/FF0000/white?text=▶';
+                                } else {
+                                    previewSrc = media.url;
+                                }
+                                return `<img src="${previewSrc}" class="preview-img" alt="预览 ${index+1}">`;
+                            }).join('')}
                             ${mediaList.length > 3 ? 
                                 `<div class="more-images">+${mediaList.length - 3}</div>` : ''
                             }
